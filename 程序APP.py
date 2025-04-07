@@ -54,7 +54,7 @@ feature_ranges = {
         "type": "categorical",
         "options": [0, 1, 2],
         "labels": ["LumA/B", "HER2+", "TNBC"],
-        "display_name": "分子亚型",
+        "display_name": "Molecular Subtype",
         "en_name": "Molecular Subtype"
     },
     "NLR": {
@@ -62,7 +62,7 @@ feature_ranges = {
         "min": 0.0,
         "max": 10.0,
         "default": 5.0,
-        "display_name": "中性粒细胞/淋巴细胞比",
+        "display_name": "NLR",
         "en_name": "NLR"
     },
     "IL6": {
@@ -70,7 +70,7 @@ feature_ranges = {
         "min": 0.0,
         "max": 100.0,
         "default": 5.0,
-        "display_name": "白介素6",
+        "display_name": "IL-6",
         "en_name": "IL-6"
     },
     "CAR": {
@@ -78,7 +78,7 @@ feature_ranges = {
         "min": 0.0,
         "max": 5.0,
         "default": 0.2,
-        "display_name": "C反应蛋白/白蛋白",
+        "display_name": "CAR",
         "en_name": "CAR"
     },
     "VitD": {
@@ -86,7 +86,7 @@ feature_ranges = {
         "min": 0.0,
         "max": 100.0,
         "default": 35.0,
-        "display_name": "维生素D",
+        "display_name": "VitD",
         "en_name": "VitD"
     },
     "FT4": {
@@ -94,7 +94,7 @@ feature_ranges = {
         "min": 0.0,
         "max": 100.0,
         "default": 15.0,
-        "display_name": "游离甲状腺素",
+        "display_name": "FT4",
         "en_name": "FT4"
     },
 }
