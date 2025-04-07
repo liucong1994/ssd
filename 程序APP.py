@@ -261,7 +261,7 @@ if st.button("🚀 开始风险评估", use_container_width=True):
 
     # SHAP可视化部分
     with st.spinner("生成可解释性分析..."):
-        plt.rcParams['font.sans-serif'] = ['SimHei']
+        plt.rcParams['font.sans-serif'] = ['Arial']  # 使用系统默认英文字体
         plt.rcParams['axes.unicode_minus'] = False
 
         sample_data = pd.DataFrame([feature_values], columns=feature_ranges.keys())
@@ -280,16 +280,19 @@ if st.button("🚀 开始风险评估", use_container_width=True):
         fig, ax = plt.subplots(figsize=(10, 6))
         y_pos = np.arange(len(feature_ranges))
 
+        # 使用英文特征名称
+        feature_labels = [feature_ranges[f]['en_name'] for f in feature_ranges]  # 关键修改处
+
         # 使用渐变色条
         colors = ['#ff6b6b' if val > 0 else '#4CAF50' for val in current_shap_values]
         bars = ax.barh(y_pos, current_shap_values, align='center', height=0.6, color=colors)
 
         # 添加数据标签
-        for i, (val, name) in enumerate(
-                zip(current_shap_values, [feature_ranges[f]['en_name'] for f in feature_ranges])):
+        for i, (val, name) in enumerate(zip(current_shap_values, feature_labels)):
             ax.text(val / 2 if val > 0 else val * 1.2, i,
                     f"{name}\n{val:.2f}",
-                    va='center', ha='left' if val < 0 else 'right',
+                    va='center',
+                    ha='left' if val < 0 else 'right',
                     color='white' if abs(val) > 0.2 else '#666',
                     fontsize=10)
 
@@ -299,8 +302,8 @@ if st.button("🚀 开始风险评估", use_container_width=True):
         ax.spines['left'].set_color('#cccccc')
         ax.spines['bottom'].set_color('#cccccc')
         ax.tick_params(axis='y', length=0)
-        ax.set_xlabel('SHAP', fontsize=12, color='#666')
-        ax.set_title('WaterFall Plot',
+        ax.set_xlabel('SHAP Value', fontsize=12, color='#666')  # 改为英文标签
+        ax.set_title('Feature Impact Analysis',
                      fontsize=14, pad=20,
                      color='#2c3e50',
                      fontweight='bold')
