@@ -293,8 +293,8 @@ if st.button("🚀 开始风险评估", use_container_width=True):
         ax.spines['left'].set_color('#cccccc')
         ax.spines['bottom'].set_color('#cccccc')
         ax.tick_params(axis='y', length=0)
-        ax.set_xlabel('特征影响值', fontsize=12, color='#666')
-        ax.set_title('特征影响分析',
+        ax.set_xlabel('SHAP', fontsize=12, color='#666')
+        ax.set_title('Impact analysis',
                      fontsize=14, pad=20,
                      color='#2c3e50',
                      fontweight='bold')
@@ -323,8 +323,15 @@ with st.expander("📚 临床指标参考指南", expanded=False):
     | NLR            | 0.5-3.0       | 全身炎症反应标志物        |
     | CAR            | <0.15         | 炎症/营养状态综合指标     |
     | IL-6           | <7 pg/mL      | 促炎细胞因子              |
-    | 维生素D        | 30-100 ng/mL  | 免疫调节相关营养指标      |
+    | VitD        | 30-100 ng/mL  | 免疫调节相关营养指标      |
     | FT4            | 10-31 pmol/L | 甲状腺功能核心指标        |
+    """)
+
+st.markdown("""
+    **分子亚型分类标准**
+    - LumA/B：激素受体阳性
+    - HER2+：HER2过表达型
+    - TNBC：三阴性乳腺癌
     """)
 
 # 页脚
