@@ -135,11 +135,11 @@ with st.container():
         # 分子亚型
         subtype = feature_ranges["Subtype"]
         val = st.selectbox(
-            label=subtype["display_name"],
-            options=subtype["options"],
-            format_func=lambda x: subtype["labels"][x],
-            help="根据免疫组化检测结果选择"
-        )
+    label=subtype["display_name"],
+    options=subtype["options"],
+    format_func=lambda x: subtype["labels"][x-1],  # 关键修改：x-1调整索引
+    help="根据免疫组化检测结果选择"
+)
         feature_values.append(val)
 
         # NLR
