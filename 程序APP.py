@@ -52,7 +52,7 @@ model = load_model()
 feature_ranges = {
     "Subtype": {
         "type": "categorical",
-        "options": [0, 1, 2],
+        "options": [1, 2, 3],  # 修改此处
         "labels": ["LumA/B", "HER2+", "TNBC"],
         "display_name": "Molecular Subtype",
         "en_name": "Molecular Subtype"
