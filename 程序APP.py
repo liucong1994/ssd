@@ -54,42 +54,48 @@ feature_ranges = {
         "type": "categorical",
         "options": [0, 1, 2],
         "labels": ["LumA/B", "HER2+", "TNBC"],
-        "display_name": "分子亚型"
+        "display_name": "分子亚型",
+        "en_name": "Molecular Subtype"
     },
     "NLR": {
         "type": "numerical",
         "min": 0.0,
         "max": 10.0,
         "default": 5.0,
-        "display_name": "中性粒细胞/淋巴细胞比"
+        "display_name": "中性粒细胞/淋巴细胞比",
+        "en_name": "NLR"
     },
     "IL6": {
         "type": "numerical",
         "min": 0.0,
         "max": 100.0,
         "default": 5.0,
-        "display_name": "白介素6"
+        "display_name": "白介素6",
+        "en_name": "IL-6"
     },
     "CAR": {
         "type": "numerical",
         "min": 0.0,
         "max": 5.0,
         "default": 0.2,
-        "display_name": "C反应蛋白/白蛋白"
+        "display_name": "C反应蛋白/白蛋白",
+        "en_name": "CAR"
     },
     "VitD": {
         "type": "numerical",
         "min": 0.0,
         "max": 100.0,
         "default": 35.0,
-        "display_name": "维生素D"
+        "display_name": "维生素D",
+        "en_name": "VitD"
     },
     "FT4": {
         "type": "numerical",
         "min": 0.0,
         "max": 100.0,
         "default": 15.0,
-        "display_name": "游离甲状腺素"
+        "display_name": "游离甲状腺素",
+        "en_name": "FT4"
     },
 }
 
@@ -280,7 +286,7 @@ if st.button("🚀 开始风险评估", use_container_width=True):
 
         # 添加数据标签
         for i, (val, name) in enumerate(
-                zip(current_shap_values, [feature_ranges[f]['display_name'] for f in feature_ranges])):
+                zip(current_shap_values, [feature_ranges[f]['en_name'] for f in feature_ranges])):
             ax.text(val / 2 if val > 0 else val * 1.2, i,
                     f"{name}\n{val:.2f}",
                     va='center', ha='left' if val < 0 else 'right',
@@ -294,7 +300,7 @@ if st.button("🚀 开始风险评估", use_container_width=True):
         ax.spines['bottom'].set_color('#cccccc')
         ax.tick_params(axis='y', length=0)
         ax.set_xlabel('SHAP', fontsize=12, color='#666')
-        ax.set_title('Impact analysis',
+        ax.set_title('WaterFall Plot',
                      fontsize=14, pad=20,
                      color='#2c3e50',
                      fontweight='bold')
@@ -311,7 +317,7 @@ if st.button("🚀 开始风险评估", use_container_width=True):
         st.caption(f"""
         影响因素说明：
         • 红色特征：增加阈下抑郁风险的因素（SHAP值 > 0）
-        • 蓝色特征：降低风险的保护性因素（SHAP值 < 0）
+        • 绿色特征：降低风险的保护性因素（SHAP值 < 0）
         """)
 
 # 辅助信息
@@ -323,15 +329,13 @@ with st.expander("📚 临床指标参考指南", expanded=False):
     | NLR            | 0.5-3.0       | 全身炎症反应标志物        |
     | CAR            | <0.15         | 炎症/营养状态综合指标     |
     | IL-6           | <7 pg/mL      | 促炎细胞因子              |
-    | VitD        | 30-100 ng/mL  | 免疫调节相关营养指标      |
-    | FT4            | 10-31 pmol/L | 甲状腺功能核心指标        |
-    """)
+    | 维生素D        | 30-100 ng/mL  | 免疫调节相关营养指标      |
+    | FT4            | 10-31 pmol/L  | 甲状腺功能核心指标        |
 
-st.markdown("""
-    **分子亚型分类标准**
-    - LumA/B：激素受体阳性
-    - HER2+：HER2过表达型
-    - TNBC：三阴性乳腺癌
+    **分子分型标准**
+    ▫️ **LumA/B型**：激素受体（ER/PR）阳性  
+    ▫️ **HER2+型**：HER2蛋白过表达/基因扩增  
+    ▫️ **TNBC型**：ER/PR/HER2均为阴性  
     """)
 
 # 页脚
